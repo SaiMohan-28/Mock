@@ -1,0 +1,369 @@
+1. How to check commit history?
+	Using git log command we can check commit history.
+
+2. What is the purpose of using git config?
+	Git config is used for identification. By whom the changes are made. 
+
+3. Explain git reset
+	used to undo local changes to the state of a Git repo.
+
+4. Write a simple program on callback function 
+	#include<stdio.h>
+	int add(int a, int b)
+	{
+		return a+b;
+	}
+	int fun(int(*fp)(int,int))
+	{	
+		return fp(2,3);
+	}
+	int main()
+	{	
+		int (*fp)(int,int)=add;
+		printf("%d\n",fun(fp));
+		return 0;
+	}
+5. Are these two statements the same?                       
+   a<=20 ? b=30 : c=30;  
+   (a<=20)? b : c=30; 
+
+	No, the expressions 1 and 2 are not same
+	
+	1st expression can be written as:
+		if(a <= 20)
+		{
+ 		   b = 30;
+		}
+		else
+		{
+ 		   c = 30;
+		}
+	2nd expression can be written as:
+		if(a <= 20)
+		{
+   		 	//Nothing here
+		}
+		else
+		{
+    			c = 30;
+		}	
+6. How do you rewrite the below statement such that 30 is used only once in the statement?         
+                a<=20 ? b=30 : c=30;
+		
+7. What will be the values of i,j,k and m                       
+
+                int i=-3, j=2, k=0, m;
+		
+                m = ++i && ++j || ++k;  // i=-2,j=3,0,1			
+	        m = ++i || ++j && ++k;  // i=-2,j=2,k=0,m=1
+
+8.  What is x in char (*(*x[3])())[5] ? 
+
+	x is Array of 3 char pointers 
+
+9. What is the time complexity with bubble sort? 
+	
+	worst-case time complexity is O(n2).
+	O(n) in the best case.
+
+OBOBOB10. What are the applications of SLL?
+OBOBOB	
+OBOBOB	1.Music Player
+	2.Message Queues
+OBOBOB	3.Tabs in Browser
+	
+OBOBOB11. What is the difference between rotating and reversing a SLL 
+
+12. Program to reverse a SLL 
+
+
+	#include <stdio.h>
+	#include <stdlib.h>
+
+
+	struct Node 
+	{
+		int data;
+		struct Node* next;
+	};
+
+static void reverse(struct Node** head_ref)
+{
+	struct Node* prev = NULL;
+	struct Node* current = *head_ref;
+	struct Node* next = NULL;
+	while (current != NULL) 
+		{
+		next = current->next;
+		current->next = prev;
+		prev = current;
+		current = next;
+		}
+	*head_ref = prev;
+}
+
+void push(struct Node** head_ref, int new_data)
+{
+	struct Node* new_node
+		= (struct Node*)malloc(sizeof(struct Node));
+	new_node->data = new_data;
+	new_node->next = (*head_ref);
+	(*head_ref) = new_node;
+}
+void printList(struct Node* head)
+{
+	struct Node* temp = head;
+	while (temp != NULL) {
+		printf("%d ", temp->data);
+		temp = temp->next;
+	}
+}
+int main()
+{
+	struct Node* head = NULL;
+
+	push(&head, 20);
+	push(&head, 4);
+	push(&head, 15);
+	push(&head, 85);
+
+	printf("Given linked list\n");
+	printList(head);
+	reverse(&head);
+	printf("\nReversed Linked list \n");
+	printList(head);
+	getchar();
+}
+
+
+13.  What do you understand about prefix, infix and postfix notations in trees?  
+	
+	Infix notation: X + Y
+
+	Operators are written in-between their operands. This is the usual way we write expressions. 
+	An expression such as A * ( B + C ) / D is usually taken to mean something like:
+	"First add B and C together, then multiply the result by A, then divide by D to give the final answer."
+	Infix notation needs extra information to make the order of evaluation of the operators clear: 
+	rules built into the language about operator precedence and associativity,
+	and brackets ( ) to allow users to override these rules. For example, the usual rules for associativity say that we perform operations from left to right, 
+	so the multiplication by A is assumed to come before the division by D.
+ 	Similarly, the usual rules for precedence say that we perform multiplication and division before we perform addition and subtraction.
+
+	Postfix notation (also known as "Reverse Polish notation"): X Y +
+	
+	Operators are written after their operands. The infix expression given above is equivalent to A B C + * D /
+	The order of evaluation of operators is always left-to-right, and brackets cannot be used to change this order.
+	Because the "+" is to the left of the "*" in the example above, the addition must be performed before the multiplication.
+	Operators act on values immediately to the left of them. For example, the "+" above uses the "B" and "C". 
+	We can add (totally unnecessary) brackets to make this explicit:
+	( (A (B C +) *) D /)
+	Thus, the "*" uses the two values immediately preceding: "A", and the result of the addition. Similarly, 
+	the "/" uses the result of the multiplication and the "D"
+	
+	Prefix notation (also known as "Polish notation"): + X Y
+	
+	Operators are written before their operands. The expressions given above are equivalent to / * A + B C D
+	As for Postfix, operators are evaluated left-to-right and brackets are superfluous. Operators act on the two nearest values on the right.
+	I have again added (totally unnecessary) brackets to make this clear:
+	(/ (* A (+ B C) ) D)
+	Although Prefix "operators are evaluated left-to-right", they use values to their right, 
+	and if these values themselves involve computations then this changes the order that the operators have to be evaluated in. 
+	In the example above, although the division is the first operator on the left, it acts on the result of the multiplication, 
+	and so the multiplication has to happen before the division (and similarly the addition has to happen before the multiplication).
+	Because Postfix operators use values to their left, any values involving computations will already have been calculated as we go left-to-right, 
+	and so the order of evaluation of the operators is not disrupted in the same way as in Prefix expressions.
+
+14. What is the difference between fork and vfork?
+	
+	FORK();
+	1. In fork() system call, child and parent process have separate memory space.
+	2. The child process and parent process gets executed simultaneously.
+	3. Child process does not suspend parent process execution in fork() system call.
+	4. Page of one process is not affected by page of other process.
+	
+	VFORK();
+	1. In vfork() system call, child and parent process share same address space.
+	2. Once child process is executed then parent process starts its execution.
+	3. Child process suspends parent process execution in vfork() system call.
+	4. Page of one process is affected by page of other process.
+
+15.  Explain ISR
+	
+	Stands for "Interrupt Service Routine." 
+	An ISR (also called an interrupt handler)is a software process invoked by an interrupt request from a hardware device. 
+	It handles the request and sends it to the CPU, interrupting the active process. 
+	When the ISR is complete, the process is resumed.
+		
+	A basic example of an ISR is a routine that handles keyboard events, such as pressing or releasing a key. 
+	Each time a key is pressed, the ISR processes the input. For example, if you press and hold the right arrow key in a text file, 
+	the ISR will signal to the CPU that the right arrow key is depressed. The CPU sends this information to the active word processor or text editing program, 
+	which will move the cursor to the right.
+
+16.  Explain pthread_join
+	
+	pthrade_join() will wait or block the calling thread until target thread is not terminated. In simple word it will wait for to exit the target thread.
+
+17. What is priority inversion and priority pre emption in scheduling.
+	
+	priority inversion:
+		Priority inversion is that occurs when a high priority task is indirectly preempted by a low priority task.
+	priority pre emption:
+		In Preemptive Priority Scheduling, at the time of arrival of a process in the ready queue, 
+		its Priority is compared with the priority of the other processes present in the ready queue,
+		as well as with the one which is being executed by the CPU at that point of time. 
+		The One with the highest priority among all the available processes will be given the CPU next.
+
+18. Exlain PCB
+	Process Control Block is a data structure that contains information of the process related to it.
+	The process control block is also known as a task control block, entry of the process table.
+
+	Process State:
+	This specifies the process state i.e. new, ready, running, waiting or terminated.
+
+	Process Number:
+	This shows the number of the particular process.
+
+	Program Counter:
+	This contains the address of the next instruction that needs to be executed in the process.
+
+	Registers:
+	This specifies the registers that are used by the process. They may include accumulators, index registers, stack pointers, general purpose registers etc.
+
+	List of Open Files:
+	These are the different files that are associated with the process
+
+	CPU Scheduling Information:
+	The process priority, pointers to scheduling queues etc. is the CPU scheduling information that is contained in the PCB. 
+	This may also include any other scheduling parameters.
+
+	Memory Management Information:
+	The memory management information includes the page tables or the segment tables depending on the memory system used. 
+	It also contains the value of the base registers, limit registers etc.
+
+	I/O Status Information:
+	This information includes the list of I/O devices used by the process, the list of files etc.
+
+	Accounting information:
+	The time limits, account numbers, amount of CPU used, process numbers etc. are all a part of the PCB accounting information.
+
+	Location of the Process Control Block:
+	The process control block is kept in a memory area that is protected from the normal user access. 
+	This is done because it contains important process information. 
+	Some of the operating systems place the PCB at the beginning of the kernel stack for the process as it is a safe location.
+
+19. What is Android?
+	
+	Android is a mobile operating system based on a modified version of the Linux kernel and other open source software, 
+	designed primarily for touchscreen mobile devices such as smartphones and tablets. 
+
+20. Explain android architecture 
+
+	The main components of android architecture are following:-
+
+	Applications
+	Application Framework
+	Android Runtime
+	Platform Libraries
+	Linux Kernel
+	
+	Applications –
+	Applications is the top layer of android architecture. 
+	The pre-installed applications like home, contacts, camera, gallery etc and third party applications downloaded from the play store like chat applications,
+	games etc. will be installed on this layer only.
+	It runs within the Android run time with the help of the classes and services provided by the application framework.
+
+	Application framework –
+	Application Framework provides several important classes which are used to create an Android application. 
+	It provides a generic abstraction for hardware access and also helps in managing the user interface with application resources. 
+	Generally, it provides the services with the help of which we can create a particular class and make that class helpful for the Applications creation.
+	It includes different types of services activity manager, notification manager, view system, package manager etc. 
+	which are helpful for the development of our application according to the prerequisite.
+
+	Application runtime –
+	Android Runtime environment is one of the most important part of Android. 
+	It contains components like core libraries and the Dalvik virtual machine(DVM). 
+	Mainly, it provides the base for the application framework and powers our application with the help of the core libraries.
+	Like Java Virtual Machine (JVM), Dalvik Virtual Machine (DVM) is a register-based virtual machine and specially designed and optimized for android 
+	to ensure that a device can run multiple instances efficiently. It depends on the layer Linux kernel for threading and low-level memory management. 
+	The core libraries enable us to implement android applications using the standard JAVA or Kotlin programming languages.
+
+	Platform libraries –
+	The Platform Libraries includes various C/C++ core libraries and Java based libraries such as Media, Graphics, Surface Manager, OpenGL etc. 
+	to provide a support for android development.
+
+	Media library provides support to play and record an audio and video formats.
+	Surface manager responsible for managing access to the display subsystem.
+	SGL and OpenGL both cross-language, cross-platform application program interface (API) are used for 2D and 3D computer graphics.
+	SQLite provides database support and FreeType provides font support.
+	Web-Kit This open source web browser engine provides all the functionality to display web content and to simplify page loading.
+	SSL (Secure Sockets Layer) is security technology to establish an encrypted link between a web server and a web browser.
+	
+	Linux Kernel –
+	Linux Kernel is heart of the android architecture. 
+	It manages all the available drivers such as display drivers, camera drivers, Bluetooth drivers, audio drivers, memory drivers, etc. 
+	which are required during the runtime.
+	The Linux Kernel will provide an abstraction layer between the device hardware and the other components of android architecture. 
+	It is responsible for management of memory, power, devices etc.
+
+	The features of Linux kernel are:
+
+	Security: The Linux kernel handles the security between the application and the system.
+	Memory Management: It efficiently handles the memory management thereby providing the freedom to develop our apps.
+	Process Management: It manages the process well, allocates resources to processes whenever they need them.
+	Network Stack: It effectively handles the network communication.
+	Driver Model: It ensures that the application works properly on the device and hardware manufacturers
+		      responsible for building their drivers into the Linux build.
+
+21. What is the difference between DVM and ART?
+
+	DALVIK VIRTUAL MACHINE
+	1. Faster Booting time
+	2. Cache builds up overtime
+	3. Occupies less space due to JIT
+	4. Works best for small storage devices
+	5. Longer app loading time
+	6. DVM converts bytecode every time you launch a specific app.
+	7. App installation time is comparatively lower as the compilation is performed later.
+	
+	ANDROID RUN TIME
+	1. Rebooting is significantly longer
+	2. The cache is built during the first boot
+	3. Consumes a lot of storage space internally due to AOT
+	4. Extremely Faster and smoother Faster and app loading time and lower processor usage
+	5. Uses AOT compiler(Ahead-Of-Time) thereby compiling apps when installed
+	6. App installation time is longer as compilation is done during installation
+	7. ART converts it just once at the time of app installation. That makes CPU execution easier. 
+	   Improved battery life due to faster execution.
+
+22.  What is the functionality of init process?  
+	
+	It is the first process executed by the kernel during the booting of a system. 
+	It is a daemon process which runs till the system is shutdown. That is why, it is the parent of all the processes. 
+	First of all, init reads the script stored in the file /etc/inittab. 
+	Command init reads the initial configuration script which basically take care of everything that a, 
+	system do at the time of system initialization like setting the clock, 
+	initializing the serial port and so on.
+
+23. Can you name some of the flavors of Android?
+	
+	Android 1.5: Android Cupcake
+	Android 1.6: Android Donut
+	Android 2.0: Android Eclair
+	Android 2.2: Android Froyo
+	Android 2.3: Android Gingerbread
+	Android 3.0: Android Honeycomb
+	Android 4.0: Android Ice Cream Sandwich
+	Android 4.1 to 4.3.1: Android Jelly Bean
+	Android 4.4 to 4.4.4: Android KitKat
+	Android 5.0 to 5.1.1: Android Lollipop
+	Android 6.0 to 6.0.1: Android Marshmallow
+	Android 7.0 to 7.1: Android Nougat
+	Android 8.0 to Android 8.1: Android Oreo
+	Android 9.0: Android Pie
+	Android 10
+	
+	
+	
+	
+	
+		 
